@@ -8,7 +8,7 @@
     "test": "karma start",
     "test-watch": "karma start --auto-watch --no-single-run",
     "start": "npm run server",
-    "deploy": "git subtree push --prefix dist origin gh-pages"
+    "deploy": "git push origin `git subtree split --prefix dist gh-pages`:gh-pages --force && git subtree push --prefix dist origin gh-pages"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,9 @@
   },
   "homepage": "https://github.com/hlobit/neth",
   "dependencies": {
-    "angular": "^1.5.0"
+    "angular": "^1.5.0",
+    "materialize-css": "^0.97.6",
+    "plyr": "^1.5.20"
   },
   "devDependencies": {
     "angular-mocks": "^1.5.0",

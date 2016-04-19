@@ -1,38 +1,40 @@
 <!doctype html>
-<html ng-app="app" lang="en">
+<html ng-app="app" lang="fr">
 <head>
   <meta charset="UTF-8">
   <title>NEtH</title>
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
-  <script>
-    function onSignIn(googleUser) {
-      var id_token = googleUser.getAuthResponse().id_token;
-      console.log('OAuth token: ' + id_token);
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', 'http://weddapi.apps.noemi-et-hubert.eu/tokensignin');
-      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      xhr.onload = function() {
-        console.log('Signed in as: ' + xhr.responseText);
-      };
-      xhr.send('idtoken=' + id_token);
 
-      var profile = googleUser.getBasicProfile();
-      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-      console.log('Name: ' + profile.getName());
-      console.log('Image URL: ' + profile.getImageUrl());
-      console.log('Email: ' + profile.getEmail());
-    }
-    function signOut() {
-      var auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(function () {
-        console.log('User signed out.');
-      });
-    }
-  </script>
-  <meta name="google-signin-client_id" content="173746435830-p1j29skvdju7p6rfnkkh5o2q1kfks0qi.apps.googleusercontent.com">
+  <!--Import Google Icon Font-->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <link rel="stylesheet" href="https://cdn.plyr.io/1.5.21/plyr.css">
+
   <base href="/">
-<link href="/app.8d80bea2d26d2c145921.css" rel="stylesheet"></head>
+<link href="/app.20e35b2215f871285822.css" rel="stylesheet"></head>
 <body>
   <app></app>
-<script src="/app.8d80bea2d26d2c145921.js"></script></body>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script> -->
+  <script src="https://cdn.plyr.io/1.5.21/plyr.js"></script>
+  <script>
+    (function(d, p){
+        var a = new XMLHttpRequest(),
+            b = d.body;
+        a.open('GET', p, true);
+        a.send();
+        a.onload = function() {
+            var c = d.createElement('div');
+            c.setAttribute('hidden', '');
+            c.innerHTML = a.responseText;
+            b.insertBefore(c, b.childNodes[0]);
+        };
+    })(document, 'https://cdn.plyr.io/1.5.21/sprite.svg');
+  </script>
+<script src="/app.20e35b2215f871285822.js"></script></body>
 </html>
