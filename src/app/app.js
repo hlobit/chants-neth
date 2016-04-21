@@ -4,7 +4,7 @@ import '../../node_modules/materialize-css/dist/css/materialize.min.css';
 import '../../node_modules/materialize-css/dist/js/materialize.min.js';
 import '../style/app.css';
 
-let app = ($timeout) => {
+let app = ['$timeout', ($timeout) => {
   return {
     template: require('./app.html'),
     controller: 'AppCtrl',
@@ -13,22 +13,22 @@ let app = ($timeout) => {
       $timeout(() => {
         plyr.setup({
           controls: ["restart", "play", "current-time", "duration"],
-          tooltips: { controls: false, seek: false }
+          tooltips: { "controls": false, "seek": false }
         });
       });
     }
   }
-};
+}];
 
 let song = () => {
   return {
     template: require('./song.html'),
     restrict: 'A',
-    controller: ($scope) => {
+    controller: ['$scope', ($scope) => {
       $scope.song.scoreUrl = 'https://docs.google.com/viewerng/viewer?url=http://noemi-et-hubert.eu/scores/' + $scope.song.id + '.pdf';
       $scope.song.musicUrl = 'music/' + $scope.song.id + '.mp3';
       $scope.song.musicDownloadUrl = 'music/' + $scope.song.id + '.m4a';
-    }
+    }]
   }
 }
 
