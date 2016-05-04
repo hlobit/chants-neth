@@ -1,8 +1,8 @@
 import angular from 'angular';
+import plyr from 'plyr';
+import 'materialize-css';
 
-import '../../node_modules/materialize-css/dist/css/materialize.min.css';
-import '../../node_modules/materialize-css/dist/js/materialize.min.js';
-import '../style/app.css';
+import '../style/app.scss';
 
 let app = ['$timeout', ($timeout) => {
   return {
@@ -13,7 +13,8 @@ let app = ['$timeout', ($timeout) => {
       $timeout(() => {
         plyr.setup({
           controls: ["restart", "play", "current-time", "duration"],
-          tooltips: { "controls": false, "seek": false }
+          tooltips: { "controls": false, "seek": false },
+          volume: "10"
         });
       });
     }
@@ -39,12 +40,12 @@ class AppCtrl {
       {
         type: 'Chant d\'entrée',
         id: 'frappez_dans_vos_mains',
-        title: 'Frappez dans vos mains',
+        title: 'Frappez dans vos mains (Pat Berning)',
       },
       {
         type: 'Signature des registres',
         id: 'the_lord_s_my_shepherd',
-        title: 'The Lord\'s My Shepherd',
+        title: 'The Lord\'s My Shepherd (Trinity)',
       }
     ];
   }

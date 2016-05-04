@@ -64,7 +64,7 @@ module.exports = function makeWebpackConfig () {
   if (isTest) {
     config.devtool = 'inline-source-map';
   } else if (isProd) {
-    config.devtool = 'source-map';
+    config.devtool = 'cheap-module-source-map';
   } else {
     config.devtool = 'eval-source-map';
   }
@@ -102,13 +102,16 @@ module.exports = function makeWebpackConfig () {
       // Use style-loader in development.
       loader: isTest ? 'null' : ExtractTextPlugin.extract('style', 'css?sourceMap!postcss')
     }, {
+      test: /\.scss$/,
+      loaders: ["style", "css", "sass"]
+    }, {
       // ASSET LOADER
       // Reference: https://github.com/webpack/file-loader
       // Copy png, jpg, jpeg, gif, svg, woff, woff2, ttf, eot files to output
       // Rename the file using the asset hash
       // Pass along the updated reference to your code
       // You can add here any file extension you want to get copied to your output
-      test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
+      test: /\.(png|jpg|jpeg|gif)$/,
       loader: 'file'
     }, {
       // HTML LOADER
@@ -116,6 +119,21 @@ module.exports = function makeWebpackConfig () {
       // Allow loading html through js
       test: /\.html$/,
       loader: 'raw'
+    }, {
+      test: /\.svg$/,
+      loader: "url-loader?limit=65000&mimetype=image/svg+xml&name=public/fonts/[name].[ext]"
+    }, {
+      test: /\.woff$/,
+      loader: "url-loader?limit=65000&mimetype=application/font-woff&name=public/fonts/[name].[ext]"
+    },  , {
+      test: /\.woff2$/,
+      loader: "url?limit=65000&mimetype=application/font-woff2&name=public/fonts/[name].[ext]"
+    }, {
+      test: /\.[ot]tf$/,
+      loader: "url?limit=65000&mimetype=application/octet-stream&name=public/fonts/[name].[ext]"
+    }, {
+      test: /\.eot$/,
+      loader: "url?limit=65000&mimetype=application/vnd.ms-fontobject&name=public/fonts/[name].[ext]"
     }]
   };
 
@@ -150,7 +168,12 @@ module.exports = function makeWebpackConfig () {
    * Reference: http://webpack.github.io/docs/configuration.html#plugins
    * List: http://webpack.github.io/docs/list-of-plugins.html
    */
-  config.plugins = [];
+  config.plugins = [
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
+    })
+  ];
 
   // Skip rendering index.html in test mode
   if (!isTest) {

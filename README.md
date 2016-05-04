@@ -1,0 +1,4 @@
+- To start the web server : `npm run server`.
+- Go to http://localhost:8080 for live preview.
+- To build : `npm run build`.
+- To deploy, commit changes to master, then `npm run deploy`.

@@ -1,0 +1,38 @@
+@import "variables";
+@import "material-icons";
+@import "~materialize-css/sass/materialize";
+
+.thumb.active {
+    display: none;
+}
+
+.song-header {
+    & > div {
+        display: inline-block;
+    }
+
+    .song-info {
+        line-height: 1.5rem;
+        margin-top: 10px;
+
+        span {
+          display: block;
+        }
+
+        .song-title {
+            font-size: 13px;
+            color: #50a191;
+        }
+    }
+}
+
+.song-body {
+  p {
+    padding: 0;
+    margin: 1rem;
+  .btn {
+    border-radius: 0px;
+    width:100%;
+  }
+  }
+}

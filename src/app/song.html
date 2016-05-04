@@ -1,12 +1,22 @@
-<div class="collapsible-header">
-  <i class="material-icons">perm_media</i>
-  {{ song.type }} — {{ song.title }}
+<div class="collapsible-header song-header">
+  <div><i class="material-icons">perm_media</i></div>
+  <div class="song-info">
+    <span class="song-type">{{ song.type }}</span>
+    <span class="song-title">{{ song.title }}</span>
+  </div>
 </div>
-<div class="collapsible-body">
+<div class="collapsible-body song-body">
+  <p>
+    <a ng-href="{{ song.scoreUrl }}" class="waves-effect waves-light btn">
+      Voir la partition
+    </a>
+  </p>
+  <p>
+  <a ng-href="{{ song.musicDownloadUrl }}" class="waves-effect waves-light btn" download>
+    Télécharger le morceau
+  </a>
+</p>
   <div class="plyr">
-    <a ng-href="{{ song.scoreUrl }}" class="waves-effect waves-light btn" style="width:100%;">Voir la partition</a>
-    <a ng-href="{{ song.musicDownloadUrl }}" class="waves-effect waves-light btn" style="width:100%;">Télécharger le morceau</a>
-    <p>{{ song.text }}</p>
     <audio controls>
       <source ng-src="{{ song.musicUrl }}" type="audio/mp3">
     </audio>
