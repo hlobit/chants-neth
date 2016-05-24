@@ -32,7 +32,7 @@ main() {
   fi
 
   for f in "$MUSIC_PATH"/*.m4a ; do
-    ffmpeg -i "$f" -vn -map_metadata -1 -acodec libmp3lame -ab "${BITRATE}k" "$MUSIC_PATH/$(basename "$f" .m4a).mp3"
+    ffmpeg -n -i "$f" -vn -map_metadata -1 -acodec libmp3lame -ab "${BITRATE}k" "$MUSIC_PATH/$(basename "$f" .m4a).mp3"
   done
 
   exit 0

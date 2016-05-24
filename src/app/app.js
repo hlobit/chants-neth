@@ -43,10 +43,80 @@ class AppCtrl {
         title: 'Frappez dans vos mains (Pat Berning)',
       },
       {
+        type: 'Gloria',
+        id: 'gloria_slzm',
+        title: 'Messe des saints Louis et Zélie Matin',
+      },
+      {
+        type: 'Alleluia',
+        id: 'alleluia_rio',
+        title: 'JMJ de Rio (JMJ 2013)',
+      },
+      {
+        type: '«Litanie» des saints',
+        id: 'priere_a_tous_les_saints',
+        title: 'Prière à tous les saints',
+      },
+      {
+        type: 'Chant à l\'Esprit',
+        id: 'viens_esprit_de_dieu',
+        title: 'Viens Esprit de Dieu (Renouveau Polonais)',
+      },
+      {
+        type: 'Action de grâce',
+        id: 'les_noces_eternelles',
+        title: 'Les noces éternelles',
+      },
+      {
+        type: 'Prière universelle',
+        id: 'entends_notre_voix',
+        title: 'Entends notre voix',
+      },
+      {
+        type: 'Offertoire',
+        id: 'je_veux_n_etre_qu_a_toi',
+        title: 'Je veux n\'être qu\'à toi (Exo)',
+      },
+      {
+        type: 'Sanctus',
+        id: 'sanctus_slzm',
+        title: 'Messe des saints Louis et Zélie Matin',
+      },
+      {
+        type: 'Anamnèse',
+        id: 'anamnese_slzm',
+        title: 'Messe des saints Louis et Zélie Matin',
+      },
+      {
+        type: 'Agnus Dei',
+        id: 'agnus_slzm',
+        title: 'Messe des saints Louis et Zélie Matin',
+      },
+      {
+        type: 'Chant pendant la communion',
+        id: 'mon_ancre_et_ma_voile',
+        title: 'Mon ancre et ma voile (David Durham)',
+      },
+      {
+        type: 'Chant après la communion',
+        id: 'au_monde',
+        title: 'Au monde (Etincelo)',
+      },
+      {
         type: 'Signature des registres',
         id: 'the_lord_s_my_shepherd',
         title: 'The Lord\'s My Shepherd (Trinity)',
-      }
+      },
+      {
+        type: 'Chant à Marie',
+        id: 'bienheureuse_marie',
+        title: 'Bienheureuse Marie (Etincelo)',
+      },
+      {
+        type: 'Chant d\'envoi',
+        id: 'celebrez',
+        title: 'Célébrez (Exo)',
+      },
     ];
   }
 }
