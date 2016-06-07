@@ -26,7 +26,7 @@ let song = () => {
     template: require('./song.html'),
     restrict: 'A',
     controller: ['$scope', ($scope) => {
-      $scope.song.scoreUrl = 'https://docs.google.com/viewerng/viewer?url=http://noemi-et-hubert.eu/scores/' + $scope.song.id + '.pdf';
+      $scope.song.scoreUrl = 'https://docs.google.com/viewerng/viewer?url=http://chants.noemi-et-hubert.eu/scores/' + $scope.song.id + '.pdf';
       $scope.song.musicUrl = 'music/' + $scope.song.id + '.mp3';
       $scope.song.musicDownloadUrl = 'music/' + $scope.song.id + '.m4a';
     }]
