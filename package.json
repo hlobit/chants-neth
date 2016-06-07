@@ -24,7 +24,7 @@
     "angular": "^1.5.0",
     "material-design-icons": "^2.2.3",
     "materialize-css": "^0.97.6",
-    "plyr": "^1.5.20"
+    "plyr": "^1.7.0"
   },
   "devDependencies": {
     "angular-mocks": "^1.5.0",

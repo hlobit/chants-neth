@@ -103,19 +103,9 @@ class AppCtrl {
         title: 'Au monde (Etincelo)',
       },
       {
-        type: 'Signature des registres',
-        id: 'the_lord_s_my_shepherd',
-        title: 'The Lord\'s My Shepherd (Trinity)',
-      },
-      {
         type: 'Chant à Marie',
         id: 'bienheureuse_marie',
         title: 'Bienheureuse Marie (Etincelo)',
-      },
-      {
-        type: 'Chant d\'envoi',
-        id: 'celebrez',
-        title: 'Célébrez (Exo)',
       },
     ];
   }
