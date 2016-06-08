@@ -12,8 +12,8 @@ let app = ['$timeout', ($timeout) => {
     link: (scope, elm, attrs) => {
       $timeout(() => {
         plyr.setup({
-          controls: ["restart", "play", "current-time", "duration"],
-          tooltips: { "controls": false, "seek": false },
+          controls: ["play", "progress", "current-time", "duration"],
+          tooltips: { "controls": true, "seek": false },
           volume: "10"
         });
       });
