@@ -4,33 +4,40 @@
 @import "~plyr/src/scss/plyr";
 
 .thumb.active {
-    display: none;
+  display: none;
+}
+
+.plyr--audio .plyr__controls {
+  border: 0;
 }
 
 .song-header {
-    & > div {
-        display: inline-block;
+  overflow: hidden;
+  .song-icon {
+    margin-top: 2px;
+    float: left;
+  }
+  .song-info {
+    overflow: hidden;
+    line-height: 1.5rem;
+    padding: 10px 0px 11px 4px;
+    span {
+      display: block;
     }
-    .song-info {
-        line-height: 1.5rem;
-        margin-top: 10px;
-        span {
-            display: block;
-        }
-        .song-title {
-            font-size: 13px;
-            color: #50a191;
-        }
+    .song-title {
+      font-size: 13px;
+      color: #50a191;
     }
+  }
 }
 
 .song-body {
-    p {
-        padding: 0;
-        margin: 1rem;
-        .btn {
-            border-radius: 0;
-            width: 100%;
-        }
+  p {
+    padding: 0;
+    margin: 1rem;
+    .btn {
+      border-radius: 0;
+      width: 100%;
     }
+  }
 }
