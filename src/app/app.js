@@ -11,7 +11,7 @@ let app = ['$timeout', ($timeout) => {
       $scope.url = 'https://github.com/hlobit/neth';
       let defer = $q.defer();
       $http
-        .get('http://nethapi.apps.noemi-et-hubert.eu/playlists/1', { cache: 'true'})
+        .get('http://chants.noemi-et-hubert.eu/api/playlists/1', { cache: 'true'})
         .success(function(data) {
             defer.resolve(data);
         });
@@ -56,9 +56,9 @@ let song = () => {
     template: require('./song.html'),
     restrict: 'A',
     controller: ['$scope', ($scope) => {
-      $scope.song.scoreUrl = 'https://docs.google.com/viewerng/viewer?url=http://nethapi.apps.noemi-et-hubert.eu' + $scope.song.score;
-      $scope.song.musicUrl = 'http://nethapi.apps.noemi-et-hubert.eu' + $scope.song.mp3;
-      $scope.song.musicDownloadUrl = 'http://nethapi.apps.noemi-et-hubert.eu' + $scope.song.m4a;
+      $scope.song.scoreUrl = 'https://docs.google.com/viewerng/viewer?url=http://chants.noemi-et-hubert.eu/api' + $scope.song.score;
+      $scope.song.musicUrl = 'http://chants.noemi-et-hubert.eu/api' + $scope.song.mp3;
+      $scope.song.musicDownloadUrl = 'http://chants.noemi-et-hubert.eu/api' + $scope.song.m4a;
     }]
   }
 }
