@@ -8,7 +8,7 @@
     "test": "karma start",
     "test-watch": "karma start --auto-watch --no-single-run",
     "start": "npm run server",
-    "deploy": "git push origin `git subtree split --prefix dist gh-pages`:gh-pages --force && git subtree push --prefix dist origin gh-pages"
+    "deploy": "git push dokku `git subtree split --prefix dist master`:master --force"
   },
   "repository": {
     "type": "git",
