@@ -11,8 +11,8 @@ let app = ['$timeout', ($timeout) => {
       $scope.url = 'https://github.com/hlobit/neth';
       let defer = $q.defer();
       $http
-        .get('http://chants.noemi-et-hubert.eu/api/playlists/1', { cache: 'true'})
-        .success(function(data) {
+        .get('api/playlists/1', { cache: 'true'})
+        .then(function(data) {
             defer.resolve(data);
         });
 
@@ -57,8 +57,8 @@ let song = () => {
     restrict: 'A',
     controller: ['$scope', ($scope) => {
       $scope.song.scoreUrl = 'https://docs.google.com/viewerng/viewer?url=http://chants.noemi-et-hubert.eu/api' + $scope.song.score;
-      $scope.song.musicUrl = 'http://chants.noemi-et-hubert.eu/api' + $scope.song.mp3;
-      $scope.song.musicDownloadUrl = 'http://chants.noemi-et-hubert.eu/api' + $scope.song.m4a;
+      $scope.song.musicUrl = 'api' + $scope.song.mp3;
+      $scope.song.musicDownloadUrl = 'api' + $scope.song.m4a;
     }]
   }
 }
