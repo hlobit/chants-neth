@@ -12,7 +12,7 @@ let app = ['$timeout', ($timeout) => {
       $http
         .get('api/playlists/1', { cache: 'true'})
         .then(function(data) {
-          let elements = data.elements;
+          let elements = data.data.elements;
           $scope.songs = [];
           for (let i = 0; i < elements.length; i++) {
             let element = elements[i];

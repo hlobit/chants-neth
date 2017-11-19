@@ -15,7 +15,7 @@ var ENV = process.env.npm_lifecycle_event;
 var isTest = ENV === 'test' || ENV === 'test-watch';
 var isProd = ENV === 'build';
 
-module.exports = function makeWebpackConfig () {
+module.exports = function makeWebpackConfig() {
   /**
    * Config
    * Reference: http://webpack.github.io/docs/configuration.html
@@ -29,7 +29,7 @@ module.exports = function makeWebpackConfig () {
    * Should be an empty object if it's generating a test build
    * Karma will set this when it's a test build
    */
-  config.entry = isTest ? {} : {
+  config.entry = isTest ? void 0 : {
     app: './src/app/app.js'
   };
 
@@ -63,9 +63,11 @@ module.exports = function makeWebpackConfig () {
    */
   if (isTest) {
     config.devtool = 'inline-source-map';
-  } else if (isProd) {
-    config.devtool = 'cheap-module-source-map';
-  } else {
+  }
+  else if (isProd) {
+    config.devtool = 'source-map';
+  }
+  else {
     config.devtool = 'eval-source-map';
   }
 
@@ -78,16 +80,23 @@ module.exports = function makeWebpackConfig () {
 
   // Initialize module
   config.module = {
-    preLoaders: [],
-    loaders: [{
+    rules: [{
       // JS LOADER
       // Reference: https://github.com/babel/babel-loader
       // Transpile .js files using babel-loader
       // Compiles ES6 and ES7 into ES5 code
       test: /\.js$/,
-      loader: 'babel',
+      loader: 'babel-loader',
       exclude: /node_modules/
     }, {
+      test: /\.scss$/,
+      use: [
+        {loader: "style-loader"},
+        {loader: "css-loader"},
+        {loader: "resolve-url-loader"},
+        {loader: "sass-loader"}
+      ]
+    },{
       // CSS LOADER
       // Reference: https://github.com/webpack/css-loader
       // Allow loading css through js
@@ -100,10 +109,14 @@ module.exports = function makeWebpackConfig () {
       //
       // Reference: https://github.com/webpack/style-loader
       // Use style-loader in development.
-      loader: isTest ? 'null' : ExtractTextPlugin.extract('style', 'css?sourceMap!postcss')
-    }, {
-      test: /\.scss$/,
-      loaders: ["style", "css", "sass"]
+
+      loader: isTest ? 'null-loader' : ExtractTextPlugin.extract({
+        fallbackLoader: 'style-loader',
+        loader: [
+          {loader: 'css-loader', query: {sourceMap: true}},
+          {loader: 'postcss-loader'}
+        ],
+      })
     }, {
       // ASSET LOADER
       // Reference: https://github.com/webpack/file-loader
@@ -111,44 +124,33 @@ module.exports = function makeWebpackConfig () {
       // Rename the file using the asset hash
       // Pass along the updated reference to your code
       // You can add here any file extension you want to get copied to your output
-      test: /\.(png|jpg|jpeg|gif)$/,
-      loader: 'file'
+      test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
+      loader: 'file-loader'
     }, {
       // HTML LOADER
       // Reference: https://github.com/webpack/raw-loader
       // Allow loading html through js
       test: /\.html$/,
-      loader: 'raw'
-    }, {
-      test: /\.svg$/,
-      loader: "url-loader?limit=65000&mimetype=image/svg+xml&name=public/fonts/[name].[ext]"
-    }, {
-      test: /\.woff$/,
-      loader: "url-loader?limit=65000&mimetype=application/font-woff&name=public/fonts/[name].[ext]"
-    },  , {
-      test: /\.woff2$/,
-      loader: "url?limit=65000&mimetype=application/font-woff2&name=public/fonts/[name].[ext]"
-    }, {
-      test: /\.[ot]tf$/,
-      loader: "url?limit=65000&mimetype=application/octet-stream&name=public/fonts/[name].[ext]"
-    }, {
-      test: /\.eot$/,
-      loader: "url?limit=65000&mimetype=application/vnd.ms-fontobject&name=public/fonts/[name].[ext]"
+      loader: 'raw-loader'
     }]
   };
 
-  // ISPARTA LOADER
-  // Reference: https://github.com/ColCh/isparta-instrumenter-loader
-  // Instrument JS files with Isparta for subsequent code coverage reporting
-  // Skips node_modules and files that end with .test.js
+  // ISTANBUL LOADER
+  // https://github.com/deepsweet/istanbul-instrumenter-loader
+  // Instrument JS files with istanbul-lib-instrument for subsequent code coverage reporting
+  // Skips node_modules and files that end with .spec.js
   if (isTest) {
-    config.module.preLoaders.push({
+    config.module.rules.push({
+      enforce: 'pre',
       test: /\.js$/,
       exclude: [
         /node_modules/,
         /\.spec\.js$/
       ],
-      loader: 'isparta-instrumenter'
+      loader: 'istanbul-instrumenter-loader',
+      query: {
+        esModules: true
+      }
     })
   }
 
@@ -157,11 +159,8 @@ module.exports = function makeWebpackConfig () {
    * Reference: https://github.com/postcss/autoprefixer-core
    * Add vendor prefixes to your css
    */
-  config.postcss = [
-    autoprefixer({
-      browsers: ['last 2 version']
-    })
-  ];
+   // NOTE: This is now handled in the `postcss.config.js`
+   //       webpack2 has some issues, making the config file necessary
 
   /**
    * Plugins
@@ -169,10 +168,13 @@ module.exports = function makeWebpackConfig () {
    * List: http://webpack.github.io/docs/list-of-plugins.html
    */
   config.plugins = [
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
-      "window.jQuery": "jquery"
+    new webpack.LoaderOptionsPlugin({
+      test: /\.scss$/i,
+      options: {
+        postcss: {
+          plugins: [autoprefixer]
+        }
+      }
     })
   ];
 
@@ -189,7 +191,7 @@ module.exports = function makeWebpackConfig () {
       // Reference: https://github.com/webpack/extract-text-webpack-plugin
       // Extract css files
       // Disabled when in test mode or not in build mode
-      new ExtractTextPlugin('[name].[hash].css', {disable: !isProd})
+      new ExtractTextPlugin({filename: 'css/[name].css', disable: !isProd, allChunks: true})
     )
   }
 
@@ -223,7 +225,10 @@ module.exports = function makeWebpackConfig () {
    */
   config.devServer = {
     contentBase: './src/public',
-    stats: 'minimal'
+    stats: 'minimal',
+    proxy: {
+      '/api': 'http://chants.noemi-et-hubert.eu'
+    }
   };
 
   return config;

@@ -7,8 +7,13 @@
   display: none;
 }
 
+.collapsible-body {
+  padding: 0;
+}
+
 .plyr--audio .plyr__controls {
   border: 0;
+  padding: 1rem;
 }
 
 .song-header {
@@ -20,7 +25,6 @@
   .song-info {
     overflow: hidden;
     line-height: 1.5rem;
-    padding: 10px 0px 11px 4px;
     span {
       display: block;
     }
